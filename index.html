@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jaya's little room ♡</title>
+<meta name="description" content="a tiny illustrated corner of the internet belonging to jaya.">
+
+<!-- Handwritten font for headings/labels + a soft rounded font for body text -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     INTRO OVERLAY — the first thing a visitor sees.
+     Dismissed on click/tap/Enter, revealing the room underneath.
+     ============================================================ -->
+<div id="intro" class="intro">
+  <div class="intro-card">
+    <p class="intro-sparkle">✦ ˚ ✧</p>
+    <h1 class="intro-title">welcome&nbsp;♡</h1>
+    <p class="intro-text">come in, I want to show you something.</p>
+    <button id="enterBtn" class="intro-button">click around…</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     THE ROOM — one illustrated SVG scene. Hotspot <button> elements
+     are positioned on top of it (in %, matching the SVG's own
+     coordinate space) so they stay aligned at any screen size.
+     ============================================================ -->
+<main id="room" class="room" aria-label="Jaya's illustrated room. Click on objects to explore.">
+
+  <!-- decorative curtain panels frame the scene on wide screens -->
+  <div class="curtain curtain-left" aria-hidden="true"></div>
+  <div class="curtain curtain-right" aria-hidden="true"></div>
+
+  <div class="room-stage">
+    <!-- ---------- THE ILLUSTRATED SVG ROOM ---------- -->
+    <svg class="room-svg" viewBox="0 0 1000 1400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An illustrated bedroom with a window, bookshelf, mirror, desk, bed and plants.">
+      <defs>
+        <linearGradient id="wallGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFF6E7"/>
+          <stop offset="55%" stop-color="#FBEADF"/>
+          <stop offset="100%" stop-color="#F5E1DA"/>
+        </linearGradient>
+        <radialGradient id="windowGlow" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FFF3C4" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#FFF3C4" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="mirrorGlass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#EAF3F7"/>
+          <stop offset="100%" stop-color="#CFE3EA"/>
+        </linearGradient>
+        <linearGradient id="deskWood" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#8A6A56"/>
+          <stop offset="100%" stop-color="#6B5145"/>
+        </linearGradient>
+        <linearGradient id="blanket" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#EFB6B8"/>
+          <stop offset="100%" stop-color="#D98F9B"/>
+        </linearGradient>
+        <pattern id="floorPattern" width="60" height="60" patternUnits="userSpaceOnUse">
+          <rect width="60" height="60" fill="#F3E3D6"/>
+          <rect width="60" height="2" fill="#E7D2C2"/>
+        </pattern>
+      </defs>
+
+      <!-- WALL + FLOOR -->
+      <rect x="0" y="0" width="1000" height="1250" fill="url(#wallGradient)"/>
+      <rect x="0" y="1250" width="1000" height="150" fill="url(#floorPattern)"/>
+      <rect x="0" y="1248" width="1000" height="6" fill="#D9B79B"/>
+
+      <!-- FAIRY LIGHT GARLAND across the top -->
+      <g id="fairyLights">
+        <path d="M0,36 Q125,80 250,36 T500,36 T750,36 T1000,36" fill="none" stroke="#C9AE8E" stroke-width="2" opacity="0.7"/>
+        <g class="bulbs">
+          <!-- bulbs positioned along the wavy path, each flickers on its own delay -->
+          <circle class="bulb b1" cx="60" cy="55" r="7" fill="#F3D98B"/>
+          <circle class="bulb b2" cx="160" cy="62" r="7" fill="#EFB6B8"/>
+          <circle class="bulb b3" cx="260" cy="45" r="7" fill="#AFCFE0"/>
+          <circle class="bulb b4" cx="360" cy="60" r="7" fill="#F3D98B"/>
+          <circle class="bulb b5" cx="460" cy="48" r="7" fill="#C9B7D8"/>
+          <circle class="bulb b6" cx="560" cy="60" r="7" fill="#EFB6B8"/>
+          <circle class="bulb b7" cx="660" cy="46" r="7" fill="#A9B89B"/>
+          <circle class="bulb b8" cx="760" cy="60" r="7" fill="#F3D98B"/>
+          <circle class="bulb b9" cx="860" cy="48" r="7" fill="#AFCFE0"/>
+          <circle class="bulb b10" cx="940" cy="58" r="7" fill="#EFB6B8"/>
+        </g>
+      </g>
+
+      <!-- STAINED-GLASS WINDOW -->
+      <g id="window" transform="translate(0,0)">
+        <circle cx="500" cy="185" r="145" fill="url(#windowGlow)"/>
+        <path d="M370,240 Q370,90 500,80 Q630,90 630,240 Z" fill="#6B5145" opacity="0.15"/>
+        <path d="M382,235 Q382,100 500,92 Q618,100 618,235 Z" fill="#FBF6E9" stroke="#8A6A56" stroke-width="6"/>
+        <!-- stained glass wedges -->
+        <path d="M500,92 L500,235 L560,235 Q617,190 610,140 Z" fill="#EFB6B8" opacity="0.75"/>
+        <path d="M500,92 L500,235 L440,235 Q383,190 390,140 Z" fill="#AFCFE0" opacity="0.7"/>
+        <path d="M500,92 Q560,100 610,140 L500,150 Z" fill="#F3D98B" opacity="0.8"/>
+        <path d="M500,92 Q440,100 390,140 L500,150 Z" fill="#A9B89B" opacity="0.7"/>
+        <path d="M500,150 L610,140 Q617,190 560,235 L500,235 Z" fill="#C9B7D8" opacity="0.5"/>
+        <path d="M500,150 L390,140 Q383,190 440,235 L500,235 Z" fill="#EFB6B8" opacity="0.5"/>
+        <path d="M382,235 Q382,100 500,92 Q618,100 618,235 Z" fill="none" stroke="#8A6A56" stroke-width="6"/>
+        <line x1="500" y1="92" x2="500" y2="235" stroke="#8A6A56" stroke-width="4"/>
+        <path d="M420,235 Q500,190 580,235" fill="none" stroke="#8A6A56" stroke-width="4"/>
+        <!-- little cloud drifting past outside the glass -->
+        <ellipse class="cloud" cx="450" cy="150" rx="22" ry="10" fill="#FFFDF7" opacity="0.55"/>
+      </g>
+
+      <!-- curtains around window, sway gently -->
+      <path class="curtain-svg curtain-svg-left" d="M330,10 Q300,300 340,700 Q300,1000 335,1250 L300,1250 Q260,900 290,700 Q255,300 290,10 Z" fill="#EFB6B8" opacity="0.85"/>
+      <path class="curtain-svg curtain-svg-right" d="M670,10 Q700,300 660,700 Q700,1000 665,1250 L700,1250 Q740,900 710,700 Q745,300 710,10 Z" fill="#EFB6B8" opacity="0.85"/>
+
+      <!-- hanging vine, left side -->
+      <path class="vine" d="M40,10 Q80,120 40,220 Q10,300 55,380" fill="none" stroke="#A9B89B" stroke-width="4" stroke-linecap="round"/>
+      <g fill="#A9B89B">
+        <ellipse cx="55" cy="60" rx="10" ry="6"/><ellipse cx="35" cy="130" rx="10" ry="6"/>
+        <ellipse cx="52" cy="200" rx="10" ry="6"/><ellipse cx="25" cy="280" rx="10" ry="6"/>
+        <ellipse cx="48" cy="350" rx="10" ry="6"/>
+      </g>
+      <!-- hanging vine, right side -->
+      <path class="vine" d="M960,10 Q920,120 960,220 Q990,300 945,380" fill="none" stroke="#A9B89B" stroke-width="4" stroke-linecap="round"/>
+      <g fill="#A9B89B">
+        <ellipse cx="945" cy="60" rx="10" ry="6"/><ellipse cx="965" cy="130" rx="10" ry="6"/>
+        <ellipse cx="948" cy="200" rx="10" ry="6"/><ellipse cx="975" cy="280" rx="10" ry="6"/>
+        <ellipse cx="952" cy="350" rx="10" ry="6"/>
+      </g>
+
+      <!-- BOOKSHELF (left) -->
+      <g id="bookshelfArt">
+        <rect x="55" y="300" width="270" height="270" rx="6" fill="#8A6A56"/>
+        <rect x="70" y="315" width="240" height="115" rx="4" fill="#F5E6D3"/>
+        <rect x="70" y="440" width="240" height="115" rx="4" fill="#F5E6D3"/>
+        <!-- books, top shelf -->
+        <rect x="80" y="345" width="18" height="80" fill="#D98F9B"/>
+        <rect x="100" y="335" width="18" height="90" fill="#AFCFE0"/>
+        <rect x="120" y="350" width="16" height="75" fill="#F3D98B"/>
+        <rect x="138" y="340" width="18" height="85" fill="#A9B89B"/>
+        <rect x="160" y="358" width="16" height="67" fill="#C9B7D8"/>
+        <rect x="180" y="345" width="18" height="80" fill="#D98F9B"/>
+        <rect x="220" y="352" width="55" height="18" rx="2" fill="#EFB6B8"/>
+        <rect x="220" y="372" width="55" height="18" rx="2" fill="#F3D98B"/>
+        <!-- books, bottom shelf -->
+        <rect x="80" y="470" width="16" height="85" fill="#A9B89B"/>
+        <rect x="98" y="480" width="18" height="75" fill="#C9B7D8"/>
+        <rect x="118" y="465" width="16" height="90" fill="#D98F9B"/>
+        <rect x="136" y="478" width="18" height="77" fill="#AFCFE0"/>
+        <!-- secret note peeking out from under a book -->
+        <rect id="secretNote" class="secret" x="150" y="540" width="46" height="16" rx="2" fill="#FFFDF3" stroke="#D98F9B" stroke-width="1.5" transform="rotate(-4 173 548)"/>
+        <rect x="178" y="470" width="17" height="85" fill="#F3D98B"/>
+        <rect x="198" y="482" width="16" height="73" fill="#EFB6B8"/>
+        <!-- little plant on top of the shelf -->
+        <rect x="230" y="255" width="46" height="40" rx="4" fill="#D98F9B"/>
+        <path d="M253,255 Q235,215 253,190 M253,255 Q271,210 253,180 M253,255 Q253,200 253,170" fill="none" stroke="#A9B89B" stroke-width="5" stroke-linecap="round"/>
+      </g>
+
+      <!-- framed artwork between shelf and mirror, purely decorative -->
+      <g transform="rotate(-3 780 280)">
+        <rect x="720" y="230" width="120" height="95" rx="3" fill="#FBF6E9" stroke="#8A6A56" stroke-width="6"/>
+        <path d="M735,300 L765,255 L790,285 L815,245 L825,300 Z" fill="#C9B7D8" opacity="0.7"/>
+      </g>
+
+      <!-- VINTAGE MIRROR (hotspot: about) -->
+      <g id="mirrorArt">
+        <ellipse cx="800" cy="420" rx="115" ry="145" fill="#8A6A56"/>
+        <ellipse cx="800" cy="420" rx="98" ry="128" fill="url(#mirrorGlass)"/>
+        <ellipse cx="800" cy="420" rx="98" ry="128" fill="#fff" opacity="0.06"/>
+        <path d="M765,300 Q800,280 835,300" fill="none" stroke="#8A6A56" stroke-width="5"/>
+        <ellipse cx="800" cy="295" rx="10" ry="8" fill="#8A6A56"/>
+        <ellipse cx="765" cy="380" rx="20" ry="35" fill="#fff" opacity="0.25"/>
+      </g>
+
+      <!-- CORKBOARD with drawings (hotspot: my art) -->
+      <g id="corkboardArt">
+        <rect x="590" y="560" width="230" height="200" rx="6" fill="#C9A876"/>
+        <rect x="600" y="570" width="210" height="180" rx="4" fill="#DFC397"/>
+        <!-- pinned drawings, slightly askew -->
+        <g transform="rotate(-6 645 620)"><rect x="612" y="585" width="66" height="80" fill="#FFFDF3" stroke="#D98F9B" stroke-width="2"/><circle cx="645" cy="615" r="14" fill="none" stroke="#C9B7D8" stroke-width="3"/><circle cx="620" cy="628" r="3" fill="#D98F9B"/></g>
+        <g transform="rotate(5 730 610)"><rect x="700" y="580" width="60" height="75" fill="#FFFDF3" stroke="#AFCFE0" stroke-width="2"/><path d="M710,630 Q730,600 750,630" fill="none" stroke="#A9B89B" stroke-width="3"/><circle cx="700" cy="580" r="3" fill="#D98F9B"/></g>
+        <g transform="rotate(-3 660 715)"><rect x="625" y="680" width="70" height="55" fill="#FFFDF3" stroke="#F3D98B" stroke-width="2"/><path d="M635,715 L655,695 L675,715" fill="none" stroke="#D98F9B" stroke-width="3"/><circle cx="625" cy="680" r="3" fill="#D98F9B"/></g>
+        <g transform="rotate(8 775 695)"><rect x="745" y="665" width="55" height="65" fill="#FFFDF3" stroke="#A9B89B" stroke-width="2"/><circle cx="772" cy="695" r="12" fill="none" stroke="#C9B7D8" stroke-width="2"/><circle cx="745" cy="665" r="3" fill="#D98F9B"/></g>
+      </g>
+
+      <!-- sticky note, decorative detail near the desk -->
+      <g transform="rotate(6 470 600)">
+        <rect x="440" y="575" width="60" height="50" fill="#F3D98B"/>
+        <text x="470" y="597" text-anchor="middle" class="svg-hand" font-size="10">remember to</text>
+        <text x="470" y="612" text-anchor="middle" class="svg-hand" font-size="10">make something</text>
+      </g>
+
+      <!-- DESK -->
+      <g id="deskArt">
+        <rect x="380" y="760" width="470" height="30" fill="url(#deskWood)"/>
+        <rect x="400" y="790" width="30" height="140" fill="#6B5145"/>
+        <rect x="780" y="790" width="30" height="140" fill="#6B5145"/>
+        <!-- sketchbook -->
+        <g transform="rotate(-4 470 745)">
+          <rect x="430" y="715" width="80" height="60" rx="2" fill="#FFFDF3" stroke="#8A6A56" stroke-width="2"/>
+          <path d="M440,735 L500,735 M440,748 L490,748 M440,761 L480,761" stroke="#C9B7D8" stroke-width="2"/>
+        </g>
+        <!-- pencil cup -->
+        <rect x="530" y="705" width="34" height="45" rx="4" fill="#D98F9B"/>
+        <line x1="538" y1="705" x2="533" y2="660" stroke="#F3D98B" stroke-width="4" stroke-linecap="round"/>
+        <line x1="547" y1="705" x2="550" y2="655" stroke="#A9B89B" stroke-width="4" stroke-linecap="round"/>
+        <line x1="556" y1="705" x2="562" y2="662" stroke="#AFCFE0" stroke-width="4" stroke-linecap="round"/>
+        <!-- closed laptop (hotspot: experiments) -->
+        <g id="laptopArt">
+          <rect x="640" y="720" width="120" height="8" rx="2" fill="#8A6A56"/>
+          <rect x="650" y="670" width="100" height="52" rx="4" fill="#A9B89B"/>
+          <rect x="656" y="676" width="88" height="40" rx="2" fill="#7C9270"/>
+        </g>
+      </g>
+
+      <!-- envelope on the desk (hotspot: say hi) -->
+      <g id="envelopeArt" transform="rotate(-3 460 700)">
+        <rect x="415" y="675" width="90" height="60" rx="2" fill="#FFFDF3" stroke="#D98F9B" stroke-width="2"/>
+        <path d="M415,675 L460,715 L505,675" fill="none" stroke="#D98F9B" stroke-width="2"/>
+        <path d="M427,690 Q460,672 480,690" fill="none" stroke="#EFB6B8" stroke-width="2"/>
+      </g>
+
+      <!-- potted plant on the floor, its own little world (hotspot: currently) -->
+      <g id="plantArt">
+        <ellipse cx="270" cy="935" rx="55" ry="14" fill="#00000010"/>
+        <path d="M235,930 L245,860 L295,860 L305,930 Z" fill="#D98F9B"/>
+        <rect x="235" y="925" width="70" height="10" fill="#C97A87"/>
+        <path d="M270,860 Q240,790 260,730 M270,860 Q300,780 275,715 M270,860 Q270,780 270,700 M270,860 Q250,810 220,780" fill="none" stroke="#7C9270" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="260" cy="730" rx="16" ry="9" fill="#A9B89B" transform="rotate(-30 260 730)"/>
+        <ellipse cx="275" cy="715" rx="16" ry="9" fill="#8CA982" transform="rotate(20 275 715)"/>
+        <ellipse cx="270" cy="700" rx="14" ry="8" fill="#A9B89B" transform="rotate(0 270 700)"/>
+        <ellipse cx="220" cy="780" rx="14" ry="8" fill="#8CA982" transform="rotate(-50 220 780)"/>
+        <!-- tiny handwritten plant tag -->
+        <rect x="300" y="905" width="70" height="26" rx="3" fill="#FFFDF3" stroke="#A9B89B" stroke-width="1.5" transform="rotate(4 335 918)"/>
+      </g>
+
+      <!-- CHARACTER: little illustrated Jaya, sitting by the desk -->
+      <g id="jayaCharacter" transform="translate(560,930)">
+        <!-- easy to swap: replace this whole <g> with <image href="assets/character/jaya.png" .../> -->
+        <ellipse cx="0" cy="150" rx="70" ry="18" fill="#00000010"/>
+        <path d="M-45,150 Q-50,60 0,50 Q50,60 45,150 Z" fill="#EFB6B8"/>
+        <circle cx="0" cy="10" r="42" fill="#F7D9B6"/>
+        <path d="M-42,0 Q-40,-45 0,-48 Q40,-45 42,0 Q42,-10 0,-14 Q-42,-10 -42,0 Z" fill="#6B5145"/>
+        <path d="M-42,-4 Q-46,30 -34,44" fill="none" stroke="#6B5145" stroke-width="8" stroke-linecap="round"/>
+        <path d="M42,-4 Q46,30 34,44" fill="none" stroke="#6B5145" stroke-width="8" stroke-linecap="round"/>
+        <g class="jaya-eyes">
+          <circle cx="-14" cy="10" r="3.4" fill="#4A3428"/>
+          <circle cx="14" cy="10" r="3.4" fill="#4A3428"/>
+        </g>
+        <path d="M-8,24 Q0,29 8,24" fill="none" stroke="#B5695E" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="-24" cy="20" r="6" fill="#EFB6B8" opacity="0.6"/>
+        <circle cx="24" cy="20" r="6" fill="#EFB6B8" opacity="0.6"/>
+        <path class="jaya-arm" d="M28,80 Q60,90 62,60" fill="none" stroke="#F7D9B6" stroke-width="10" stroke-linecap="round"/>
+      </g>
+
+      <!-- BED, spans the width at the bottom (hotspot: random little things) -->
+      <g id="bedArt">
+        <rect x="60" y="1080" width="880" height="220" rx="18" fill="#F5E6D3"/>
+        <rect x="60" y="1080" width="880" height="60" rx="18" fill="#EFE0CC"/>
+        <!-- floral blanket -->
+        <rect x="60" y="1140" width="880" height="160" rx="14" fill="url(#blanket)"/>
+        <g fill="#FFF6E7" opacity="0.85">
+          <circle cx="160" cy="1190" r="5"/><circle cx="180" cy="1180" r="5"/><circle cx="200" cy="1190" r="5"/><circle cx="180" cy="1205" r="5"/>
+          <circle cx="360" cy="1230" r="5"/><circle cx="380" cy="1220" r="5"/><circle cx="400" cy="1230" r="5"/><circle cx="380" cy="1245" r="5"/>
+          <circle cx="600" cy="1190" r="5"/><circle cx="620" cy="1180" r="5"/><circle cx="640" cy="1190" r="5"/><circle cx="620" cy="1205" r="5"/>
+          <circle cx="780" cy="1240" r="5"/><circle cx="800" cy="1230" r="5"/><circle cx="820" cy="1240" r="5"/><circle cx="800" cy="1255" r="5"/>
+        </g>
+        <!-- pillows -->
+        <ellipse cx="170" cy="1110" rx="80" ry="34" fill="#FFFDF3"/>
+        <ellipse cx="310" cy="1115" rx="70" ry="30" fill="#EFB6B8"/>
+        <!-- tiny plushie cat -->
+        <g transform="translate(770,1100)">
+          <ellipse cx="0" cy="20" rx="34" ry="22" fill="#DFC397"/>
+          <circle cx="0" cy="-2" r="20" fill="#DFC397"/>
+          <path d="M-16,-16 L-22,-32 L-6,-20 Z" fill="#DFC397"/>
+          <path d="M16,-16 L22,-32 L6,-20 Z" fill="#DFC397"/>
+          <circle cx="-7" cy="-3" r="2" fill="#6B5145"/>
+          <circle cx="7" cy="-3" r="2" fill="#6B5145"/>
+          <path d="M-4,4 Q0,7 4,4" stroke="#6B5145" stroke-width="1.5" fill="none"/>
+        </g>
+      </g>
+
+      <!-- floor: scattered papers near the desk, purely decorative -->
+      <g opacity="0.9">
+        <rect x="330" y="1020" width="34" height="46" fill="#FFFDF3" transform="rotate(-10 347 1043)"/>
+        <rect x="360" y="1035" width="30" height="40" fill="#FFFDF3" transform="rotate(8 375 1055)"/>
+      </g>
+
+    </svg>
+
+    <!-- ---------- HOTSPOT BUTTONS (positioned in % over the SVG) ---------- -->
+    <!-- Each button: gentle hover motion/glow (CSS) + handwritten tooltip + opens a modal on click -->
+
+    <button class="hotspot hotspot-mirror" style="left:68.5%; top:19%; width:12%; height:22%;" data-modal="about" aria-label="A vintage mirror">
+      <span class="hotspot-label">who is this girl? 👀</span>
+    </button>
+
+    <button class="hotspot hotspot-books" style="left:5.5%; top:21.5%; width:27%; height:19%;" data-modal="learning" aria-label="A bookshelf">
+      <span class="hotspot-label">things I'm learning</span>
+    </button>
+
+    <button class="hotspot hotspot-art" style="left:59%; top:40%; width:26%; height:16%;" data-modal="art" aria-label="A corkboard covered in drawings">
+      <span class="hotspot-label">my drawings ✎</span>
+    </button>
+
+    <button class="hotspot hotspot-laptop" style="left:64%; top:47.5%; width:12%; height:6%;" data-modal="experiments" aria-label="A closed laptop">
+      <span class="hotspot-label">poke around here…</span>
+    </button>
+
+    <button class="hotspot hotspot-envelope" style="left:41%; top:47.5%; width:9.5%; height:5%;" data-modal="hello" aria-label="A little envelope">
+      <span class="hotspot-label">say hi? 💌</span>
+    </button>
+
+    <button class="hotspot hotspot-plant" style="left:20%; top:49%; width:15%; height:14%;" data-modal="currently" aria-label="A small potted plant">
+      <span class="hotspot-label">currently growing…</span>
+    </button>
+
+    <button class="hotspot hotspot-bed" style="left:6%; top:77%; width:88%; height:16%;" data-modal="bed" aria-label="A cozy bed">
+      <span class="hotspot-label">random little things</span>
+    </button>
+
+  </div>
+</main>
+
+<!-- ============================================================
+     MODALS — one per room object. Only one is shown at a time.
+     ============================================================ -->
+<div id="modalOverlay" class="modal-overlay">
+
+  <div class="modal-card" id="modal-about" data-modal="about">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">the mirror says</p>
+    <h2 class="modal-hand">hi, I'm Jaya ♡</h2>
+    <p class="modal-body">I'm a student, artist, and professional collector of random ideas.</p>
+    <p class="modal-body">I like drawing, making little things, trying new creative stuff, and turning thoughts into strange little worlds.</p>
+    <p class="modal-body">I'm still figuring out what I'm making.</p>
+    <p class="modal-body modal-emphasis">That's kind of the fun part.</p>
+  </div>
+
+  <div class="modal-card" id="modal-learning" data-modal="learning">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">a page from the notebook</p>
+    <h2 class="modal-hand">currently learning…</h2>
+    <ul class="notebook-list">
+      <li>✦ animation</li>
+      <li>✦ motion art</li>
+      <li>✦ digital art</li>
+      <li>✦ Blender</li>
+      <li>✦ storytelling</li>
+    </ul>
+    <p class="modal-body modal-small">(the handwriting gets messier every week)</p>
+  </div>
+
+  <div class="modal-card modal-card-wide" id="modal-art" data-modal="art">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">this is where I make things</p>
+    <h2 class="modal-hand">my drawings</h2>
+    <div class="gallery">
+      <button class="gallery-arrow gallery-prev" aria-label="previous drawing">〈</button>
+      <figure class="gallery-figure">
+        <img id="galleryImage" src="assets/drawings/placeholder-01.svg" alt="little drawing">
+        <figcaption id="galleryCaption">little drawing #01<br><span class="modal-small">made by me ♡</span></figcaption>
+      </figure>
+      <button class="gallery-arrow gallery-next" aria-label="next drawing">〉</button>
+    </div>
+  </div>
+
+  <div class="modal-card" id="modal-experiments" data-modal="experiments">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">the laptop hums quietly</p>
+    <h2 class="modal-hand">experiments</h2>
+    <p class="modal-body">nothing built yet — just a lot of tabs open and half-finished ideas.</p>
+    <p class="modal-body">this corner is for whatever weird little thing I try next.</p>
+    <p class="modal-body modal-small">check back later ♡</p>
+  </div>
+
+  <div class="modal-card" id="modal-hello" data-modal="hello">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">a little note</p>
+    <h2 class="modal-hand">want to say hi?</h2>
+    <p class="modal-body">I like hearing from people who wandered in. no pressure, just a little hello is nice too.</p>
+    <a class="modal-mail" href="mailto:jaya@example.com">✉ send a little hello</a>
+    <p class="modal-body modal-small">(swap this email for your real one in index.html)</p>
+  </div>
+
+  <div class="modal-card" id="modal-currently" data-modal="currently">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">a tiny label on the pot</p>
+    <h2 class="modal-hand">currently growing…</h2>
+    <ul class="notebook-list">
+      <li>🌱 this plant (slowly, hopefully)</li>
+      <li>🌱 an idea for a little comic</li>
+      <li>🌱 my patience for messy first drafts</li>
+      <li>🌱 a plan for tomorrow</li>
+    </ul>
+  </div>
+
+  <div class="modal-card" id="modal-bed" data-modal="bed">
+    <button class="modal-close" aria-label="close">✕</button>
+    <p class="modal-eyebrow">tucked under the blanket</p>
+    <h2 class="modal-hand">random little things</h2>
+    <ul class="notebook-list">
+      <li>a mug I refill too many times a day</li>
+      <li>a song that's been looping in my head</li>
+      <li>a doodle I'm secretly proud of</li>
+      <li>a cat who thinks this bed is his</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- little toast for discovered secrets, e.g. "you found me." -->
+<div id="secretToast" class="secret-toast" aria-live="polite"></div>
+
+<!-- container JS will fill with floating dust/firefly particles -->
+<div id="particles" class="particles" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

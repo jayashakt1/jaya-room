@@ -1,0 +1,440 @@
+/* ==========================================================
+   JAYA'S ROOM — stylesheet
+   Palette, type and animation tokens live at the top so the
+   whole mood can be tuned from one place.
+   ========================================================== */
+
+:root {
+  --cream:    #FFF6E7;
+  --blush:    #EFB6B8;
+  --rose:     #D98F9B;
+  --sage:     #A9B89B;
+  --lavender: #C9B7D8;
+  --butter:   #F3D98B;
+  --powder:   #AFCFE0;
+  --brown:    #6B5145;
+
+  --hand: 'Caveat', cursive;
+  --body: 'Quicksand', sans-serif;
+
+  --ease-soft: cubic-bezier(.34,.68,.42,1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  font-family: var(--body);
+  color: var(--brown);
+  overflow-x: hidden;
+}
+
+/* a tiny hand-drawn flower stands in for the cursor across the room */
+body {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'><circle cx='13' cy='7' r='4' fill='%23D98F9B'/><circle cx='19' cy='13' r='4' fill='%23EFB6B8'/><circle cx='13' cy='19' r='4' fill='%23C9B7D8'/><circle cx='7' cy='13' r='4' fill='%23AFCFE0'/><circle cx='13' cy='13' r='3.5' fill='%23F3D98B'/></svg>") 13 13, auto;
+}
+
+h1, h2, h3 { font-family: var(--hand); font-weight: 600; margin: 0; }
+
+button {
+  font-family: var(--body);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+button:focus-visible, a:focus-visible {
+  outline: 3px dashed var(--rose);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   INTRO OVERLAY
+   ========================================================== */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 30%, #FFF3D6 0%, #F6D9DA 55%, #E6C2CE 100%);
+  transition: opacity .7s var(--ease-soft), visibility .7s;
+}
+.intro.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.intro-card {
+  text-align: center;
+  padding: 2.5rem 3rem;
+  background: #FFFDF7;
+  border-radius: 42% 58% 62% 38% / 48% 42% 58% 52%;
+  box-shadow: 0 20px 60px rgba(107, 81, 69, 0.18);
+  max-width: 380px;
+}
+.intro-sparkle {
+  margin: 0 0 .25rem;
+  color: var(--butter);
+  font-size: 1.1rem;
+  letter-spacing: .3em;
+}
+.intro-title {
+  font-size: 3.2rem;
+  color: var(--rose);
+}
+.intro-text {
+  font-size: 1.15rem;
+  margin: .6rem 0 1.6rem;
+}
+.intro-button {
+  font-family: var(--hand);
+  font-size: 1.4rem;
+  color: var(--brown);
+  background: var(--butter);
+  padding: .5rem 1.6rem;
+  border-radius: 30px 26px 32px 24px;
+  box-shadow: 0 6px 0 rgba(107,81,69,.15);
+  transition: transform .25s var(--ease-soft);
+}
+.intro-button:hover { transform: translateY(-3px) rotate(-1deg); }
+
+/* ==========================================================
+   ROOM LAYOUT
+   ========================================================== */
+.room {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #FBEADF 0%, #F3E3D6 100%);
+  padding: 0 0 4rem;
+}
+
+.room-stage {
+  position: relative;
+  width: min(760px, 100vw);
+  aspect-ratio: 1000 / 1400;
+}
+
+.room-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* decorative side curtains, only shown when there's room to spare */
+.curtain {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: max(0px, calc((100vw - 760px) / 2));
+  background: linear-gradient(180deg, #E9AEB4 0%, #D98F9B 60%, #C97A87 100%);
+  z-index: 0;
+}
+.curtain::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 12px, transparent 12px 34px);
+}
+.curtain-left  { left: 0; border-radius: 0 30px 30px 0; }
+.curtain-right { right: 0; border-radius: 30px 0 0 30px; }
+@media (max-width: 900px) { .curtain { display: none; } }
+
+/* ==========================================================
+   AMBIENT ANIMATION — fairy lights, curtains, vines, cloud
+   ========================================================== */
+.bulb { transform-origin: center; }
+.bulb { animation: flicker 3.4s ease-in-out infinite; }
+.b1{animation-delay:.1s}.b2{animation-delay:.6s}.b3{animation-delay:1.1s}.b4{animation-delay:.3s}.b5{animation-delay:1.6s}
+.b6{animation-delay:.8s}.b7{animation-delay:2.1s}.b8{animation-delay:1.3s}.b9{animation-delay:.4s}.b10{animation-delay:1.9s}
+@keyframes flicker {
+  0%, 100% { opacity: .55; filter: drop-shadow(0 0 0px currentColor); }
+  50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(243,217,139,.9)); }
+}
+
+.curtain-svg { transform-origin: top center; animation: sway 7s ease-in-out infinite; }
+.curtain-svg-left { animation-delay: 0s; }
+.curtain-svg-right { animation-delay: .6s; transform-origin: top center; }
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.1deg); }
+}
+
+.vine { animation: swayVine 6s ease-in-out infinite; transform-origin: top center; }
+@keyframes swayVine {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+.cloud { animation: drift 22s linear infinite; }
+@keyframes drift {
+  0% { transform: translateX(-40px); opacity: 0; }
+  10% { opacity: .55; }
+  90% { opacity: .55; }
+  100% { transform: translateX(180px); opacity: 0; }
+}
+
+.jaya-eyes { animation: blink 5.5s ease-in-out infinite; transform-origin: center; }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+.jaya-arm { animation: draw 4s ease-in-out infinite; transform-origin: 28px 80px; }
+@keyframes draw {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-6deg); }
+}
+#jayaCharacter { animation: breathe 6s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes breathe {
+  0%, 100% { transform: translate(560px, 930px) scale(1); }
+  50% { transform: translate(560px, 930px) scale(1.008); }
+}
+
+/* respect reduced-motion: freeze the whole cast of gentle movement */
+@media (prefers-reduced-motion: reduce) {
+  .bulb, .curtain-svg, .vine, .cloud, .jaya-eyes, .jaya-arm, #jayaCharacter,
+  .hotspot, .particle { animation: none !important; transition: none !important; }
+}
+
+/* ==========================================================
+   HOTSPOTS
+   ========================================================== */
+.hotspot {
+  position: absolute;
+  border: 2px dashed transparent;
+  border-radius: 42% 58% 60% 40% / 55% 45% 55% 45%;
+  transition: transform .3s var(--ease-soft), border-color .3s, filter .3s;
+  z-index: 2;
+}
+.hotspot:hover, .hotspot:focus-visible {
+  transform: scale(1.035) rotate(-1deg);
+  border-color: rgba(217, 143, 155, .55);
+  filter: drop-shadow(0 0 14px rgba(243, 217, 139, .55));
+}
+.hotspot:focus-visible { outline: none; }
+
+.hotspot-label {
+  position: absolute;
+  top: -2.1rem;
+  left: 50%;
+  transform: translate(-50%, 6px) rotate(-2deg);
+  white-space: nowrap;
+  background: #FFFDF3;
+  color: var(--brown);
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  padding: .2rem .8rem;
+  border-radius: 14px 16px 14px 18px;
+  box-shadow: 0 4px 10px rgba(107,81,69,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s var(--ease-soft), transform .25s var(--ease-soft);
+}
+.hotspot:hover .hotspot-label,
+.hotspot:focus-visible .hotspot-label {
+  opacity: 1;
+  transform: translate(-50%, 0) rotate(-2deg);
+}
+
+/* secret detail — a small pin poking out from under a book */
+.secret { cursor: pointer; transition: transform .2s; }
+.secret:hover { transform: translateY(-2px); }
+
+/* small in-scene handwritten text set inside the SVG (sticky note etc.) */
+.svg-hand { font-family: var(--hand); fill: var(--brown); }
+
+/* ==========================================================
+   MODALS
+   ========================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(107, 81, 69, 0.28);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s var(--ease-soft), visibility .3s;
+  padding: 1.2rem;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+
+.modal-card {
+  display: none;
+  position: relative;
+  background: #FFFDF7;
+  max-width: 420px;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 2.2rem 2rem 1.8rem;
+  border-radius: 22px 26px 22px 28px;
+  box-shadow: 0 24px 70px rgba(107,81,69,.28);
+  transform: translateY(14px) scale(.97);
+  transition: transform .3s var(--ease-soft);
+}
+.modal-card-wide { max-width: 480px; }
+.modal-overlay.open .modal-card.active {
+  display: block;
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: .9rem; right: 1rem;
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  color: var(--rose);
+  line-height: 1;
+}
+.modal-eyebrow {
+  font-family: var(--hand);
+  color: var(--rose);
+  font-size: 1.05rem;
+  margin: 0 0 .1rem;
+}
+.modal-hand {
+  font-size: 2.4rem;
+  color: var(--brown);
+  margin-bottom: .8rem;
+}
+.modal-body { font-size: 1.02rem; line-height: 1.55; margin: 0 0 .6rem; }
+.modal-emphasis { font-family: var(--hand); font-size: 1.3rem; color: var(--rose); }
+.modal-small { font-size: .85rem; color: #A08876; }
+
+.notebook-list {
+  list-style: none;
+  margin: 0 0 .6rem;
+  padding: 0;
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  line-height: 1.9;
+}
+.notebook-list li {
+  border-bottom: 1px dashed rgba(107,81,69,.2);
+  padding-bottom: .15rem;
+}
+
+.modal-mail {
+  display: inline-block;
+  margin: .6rem 0 .5rem;
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  color: var(--brown);
+  background: var(--powder);
+  padding: .5rem 1.3rem;
+  border-radius: 22px 18px 24px 16px;
+  text-decoration: none;
+  transition: transform .25s var(--ease-soft);
+}
+.modal-mail:hover { transform: translateY(-2px) rotate(-1deg); }
+
+/* gallery inside the "art" modal */
+.gallery {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: center;
+}
+.gallery-figure {
+  margin: 0;
+  text-align: center;
+  max-width: 260px;
+}
+.gallery-figure img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(107,81,69,.18);
+}
+.gallery-figure figcaption {
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  margin-top: .5rem;
+}
+.gallery-arrow {
+  font-family: var(--hand);
+  font-size: 1.8rem;
+  color: var(--rose);
+  padding: .4rem .6rem;
+  transition: transform .2s;
+}
+.gallery-arrow:hover { transform: scale(1.2); }
+
+/* ==========================================================
+   SECRET TOAST + PARTICLES
+   ========================================================== */
+.secret-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: #FFFDF3;
+  color: var(--brown);
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  padding: .55rem 1.4rem;
+  border-radius: 16px 20px 16px 22px;
+  box-shadow: 0 10px 30px rgba(107,81,69,.2);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 60;
+  transition: opacity .35s var(--ease-soft), transform .35s var(--ease-soft);
+}
+.secret-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  bottom: -10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--butter);
+  opacity: .6;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: .7; }
+  90% { opacity: .5; }
+  100% { transform: translateY(-110vh) translateX(20px); opacity: 0; }
+}
+
+/* click sparkle */
+.click-sparkle {
+  position: fixed;
+  z-index: 90;
+  pointer-events: none;
+  font-size: 1.1rem;
+  color: var(--rose);
+  animation: sparklePop .6s ease-out forwards;
+}
+@keyframes sparklePop {
+  0% { transform: translate(-50%,-50%) scale(0.4) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-50%,-140%) scale(1.1) rotate(25deg); opacity: 0; }
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 640px) {
+  .room-stage { width: 100vw; }
+  .modal-hand { font-size: 2rem; }
+  .intro-card { padding: 2rem 1.6rem; }
+  .intro-title { font-size: 2.6rem; }
+}

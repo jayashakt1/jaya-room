@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <rect width="400" height="500" fill="#FFFBF2"/>
+  <rect x="14" y="14" width="372" height="472" fill="none" stroke="#D98F9B" stroke-width="3" stroke-dasharray="10 8" rx="8"/>
+  <circle cx="200" cy="190" r="60" fill="none" stroke="#C9B7D8" stroke-width="4"/>
+  <path d="M150 260 Q200 300 250 260" fill="none" stroke="#A9B89B" stroke-width="4" stroke-linecap="round"/>
+  <text x="200" y="380" font-family="Georgia, serif" font-size="20" fill="#6B5145" text-anchor="middle">put drawing #01 here</text>
+  <text x="200" y="410" font-family="Georgia, serif" font-size="13" fill="#A08876" text-anchor="middle">(replace this file)</text>
+</svg>
